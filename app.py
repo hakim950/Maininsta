@@ -8,11 +8,12 @@ L = instaloader.Instaloader()
 
 def login_to_instagram(username, password):
     try:
-        L.login(username, password)  # Use login() directly on the Instaloader instance
+        L.context.login(user=username, passwd=password)  # Corrected login method
         return True
     except Exception as e:
         st.write(f"Error logging in: {e}")
         return False
+
 
 
 def get_instagram_data(account_name):
