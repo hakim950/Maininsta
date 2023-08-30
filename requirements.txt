@@ -1,4 +1,4 @@
 streamlit
-instaloader
+instaloader==4.8.3
 pandas
 requests
