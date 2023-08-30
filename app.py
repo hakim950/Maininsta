@@ -62,8 +62,8 @@ def main():
     st.title('Instagram Data Fetcher')
 
     # Login to Instagram
-    USERNAME = "YOUR_USERNAME"
-    PASSWORD = "YOUR_PASSWORD"
+    USERNAME = "kimo159750@gmail.com"
+    PASSWORD = "AAaa11aa"
     if not login_to_instagram(USERNAME, PASSWORD):
         st.write("Failed to log in to Instagram.")
         return
