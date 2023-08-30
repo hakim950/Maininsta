@@ -2,19 +2,13 @@ import streamlit as st
 import instaloader
 import time
 import pandas as pd
-import requests
-import os
-import streamlit as st
-import instaloader
-import time
-import pandas as pd
 
 # Initialize instaloader
 L = instaloader.Instaloader()
 
 def login_to_instagram(username, password):
     try:
-        L.context.log_in(username, password)
+        L.login(username, password)  # Corrected login method
         return True
     except Exception as e:
         st.write(f"Error logging in: {e}")
