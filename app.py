@@ -4,13 +4,25 @@ import time
 import pandas as pd
 import requests
 import os
+import streamlit as st
+import instaloader
+import time
+import pandas as pd
 
 # Initialize instaloader
-loader = instaloader.Instaloader()
+L = instaloader.Instaloader()
+
+def login_to_instagram(username, password):
+    try:
+        L.context.log_in(username, password)
+        return True
+    except Exception as e:
+        st.write(f"Error logging in: {e}")
+        return False
 
 def get_instagram_data(account_name):
     try:
-        profile = instaloader.Profile.from_username(loader.context, account_name)
+        profile = instaloader.Profile.from_username(L.context, account_name)
     except Exception as e:
         st.write(f"Error fetching profile: {e}")
         return None
@@ -24,7 +36,7 @@ def get_instagram_data(account_name):
         return None
 
     for post in posts:
-        time.sleep(0.5)  # Increasing the delay to 5 seconds
+        time.sleep(5)  # Increasing the delay to 5 seconds
 
         post_data = {
             'Date': post.date.strftime('%Y-%m-%d %H:%M:%S'),
@@ -48,6 +60,13 @@ def get_instagram_data(account_name):
 
 def main():
     st.title('Instagram Data Fetcher')
+
+    # Login to Instagram
+    USERNAME = "YOUR_USERNAME"
+    PASSWORD = "YOUR_PASSWORD"
+    if not login_to_instagram(USERNAME, PASSWORD):
+        st.write("Failed to log in to Instagram.")
+        return
 
     accounts = st.text_area("Enter Instagram account names (comma-separated)").split(',')
     accounts = [account.strip() for account in accounts]
